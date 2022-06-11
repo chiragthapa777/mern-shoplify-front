@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useRef } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/auth/Login";
@@ -8,13 +8,12 @@ import Profile from "./pages/profile/Profile";
 import Product from "./pages/product/Product";
 import FilteredProducts from "./pages/filteredProducts/FilteredProducts";
 import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
-
+import Dashboard from "./pages/dashboard/Dashboard";
 
 export default function App() {
   const user = true;
   return (
-    <>
+    <div>
       <Navbar />
       <BrowserRouter>
         <Routes>
@@ -25,6 +24,9 @@ export default function App() {
             </Route>
           )}
           <Route path="/" element={<Home />} />
+          <Route>
+             <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
           <Route path="/product/:id" element={<Product />} />
           <Route path="/products" element={<FilteredProducts />} />
           <Route path="/login" element={<Login />} />
@@ -32,7 +34,6 @@ export default function App() {
           <Route path="*" element={<Navigate to={user ? "/" : "/login"} />} />
         </Routes>
       </BrowserRouter>
-      <Footer />
-    </>
+    </div>
   );
 }
